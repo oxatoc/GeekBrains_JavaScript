@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <p>Задание 2.</p>
+    <p id="adminName"></p>
+    <p>Задание 4.</p>
+    <p id="task4Value"></p>
+    <p>Задание 5.</p>
+    <p>Из описания по
+        <a href="https://www.w3schools.com/tags/att_script_async.asp">ссылке</a>:
+    </p>
+    <p id="task5Comments"></p>
+
+
+    <script>
+        //Задание 1.  Задать температуру в градусах по Цельсию. Вывести в alert соответствующую температуру в градусах по Фаренгейту.
+        var Tc = parseFloat(prompt("Укажите температуру в градусах Цельсия"));
+        alert("Температура по Фаренгейту: " + ((9 / 5) * Tc + 32));
+
+        // Задание 2. Работа с переменными
+        var admin;
+        var name;
+        name = "Василий";
+        admin = name;
+        document.getElementById("adminName").innerHTML = "Вывод переменной 'admin': " + admin;
+
+        //Задание 4. Чему будет равно JS-выражение 1000 + "108"
+        document.getElementById("task4Value").innerHTML = "Выражение 1000 + '108' будет равно: " + 1000 + "108" + "<br> Причина - если оператор '+' применяется к строковым типа данных, то он 'склеивает' строки";
+
+        //Задание 5. Самостоятельно разобраться с атрибутами тега script (async и defer)
+        var str = "- если не установлен ни async, ни defer, то сценарий JavaScript подтягивается браузером с сервера до построения DOM и CCSOM. Если файл JavaScript большой, то это увеличивает длительность отрисовки страницы<br>";
+        str += " - если установлен async, то сценарий JavaScript выполняется параллельно построению страницы браузером <br>";
+        str += "- если установлен defer, то сценарий JavaScript будет выполняться после построения страницы браузером<br>";
+        document.getElementById("task5Comments").innerHTML = str;
+
+    </script>
+
+</body>
+
+</html>
