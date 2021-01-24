@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //Задание 1. Почему код даёт именно такие результаты?
+        var a = 1, b = 1, c, d;
+        c = ++a; alert(c);           // 2
+        //Ответ: т.к. применена префиксная форма инкеремента, то переменная a = 1 сначала увеличивается на 1, а затем результат отображается функцией alert().
+
+        d = b++; alert(d);           // 1
+        //Ответ: т.к. применена постфиксная форма инкремента, то значение переменной b = 1 записывается в переменную d, а затем значение переменной b увеличивается на 1.
+
+        c = (2 + ++a); alert(c);      // 5
+        //Ответ: т.к. применена префиксная форма инкремента, то переменная а = 2 сначала увеличивается на 1, результат а = 3 прибавляется к числу 2, получается число 5.
+
+        d = (2 + b++); alert(d);      // 4
+        //Ответ: т.к. применена постфиксная форма инкремента, то значение переменной b = 2 складывается с числом 2, в затем значение переменной b увеличивается на 1; результат сложения значения переменной b до инкрементирования с числом 2 записывается в переменную d.
+
+        alert(a);                    // 3
+        //Ответ: функция alert() отображает текущее значение переменной a по результатам инкрементирования на предыдущих шагах
+
+        alert(b);                    // 3
+        //Ответ: функция alert() отображает текущее значение переменной b по результатам инкрементирования на предыдущих шагах
+
+        //Задание 2. Чему будет равен x в примере ниже?
+        document.write("<p>Задание 2</p>");
+        var a = 2;
+        var x = 1 + (a *= 2);
+        document.write('x = ' + x + "<br>");
+        //Ответ: переменная a = 2 умножается на число 2, к результату прибавляется 1, получается число 5;
+
+        //Задание 3. 
+        document.write("<p>Задание 3</p>");
+        var a = 5, b = -7;
+        if (a >= 0 && b >= 0) {
+            document.write('<p>Разность: ' + (a - b) + '<p>');
+        } else if (a < 0 && b < 0) {
+            document.write('<p>Произведение: ' + (a * b) + '<p>');
+        } else if ((a < 0 && b >= 0) | (a >= 0 && b < 0)) {
+            document.write('<p>Сумма: ' + (a + b) + '<p>');
+        }
+
+        //Задание 4.
+        document.write("<p>Задание 4</p>");
+        var a = Math.round(Math.random() * 15);
+        document.write('a = ' + a);
+        switch (a) {
+            case 0: document.write('<p>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 1: document.write('<p>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 2: document.write('<p>2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 3: document.write('<p>3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 4: document.write('<p>4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 5: document.write('<p>5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 6: document.write('<p>6, 7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 7: document.write('<p>7, 8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 8: document.write('<p>8, 9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 9: document.write('<p>9, 10, 11, 12, 13, 14, 15<p>'); break;
+            case 10: document.write('<p>10, 11, 12, 13, 14, 15<p>'); break;
+            case 11: document.write('<p>11, 12, 13, 14, 15<p>'); break;
+            case 12: document.write('<p>12, 13, 14, 15<p>'); break;
+            case 13: document.write('<p>13, 14, 15<p>'); break;
+            case 14: document.write('<p>14, 15<p>'); break;
+            case 15: document.write('<p>15<p>'); break;
+        }
+
+
+        //Задание 5.
+
+        function sum(a, b) {
+            return a + b;
+        }
+        function diff(a, b) {
+            return a - b;
+        }
+
+        function mult(a, b) {
+            return a * b;
+        }
+
+        function div(a, b) {
+            return a / b;
+        }
+
+        //Задание 6.
+        document.write("<p>Задание 6</p>");
+        function mathOperation(arg1, arg2, operation) {
+            switch (operation) {
+                case "sum": return sum(arg1, arg2);
+                case "diff": return diff(arg1, arg2);
+                case "mult": return mult(arg1, arg2);
+                case "div": return div(arg1, arg2);
+                default:
+                    document.write(`Операция '${operation}' не идентифицирована`);
+            }
+        }
+        document.write(mathOperation(3, 7, "sum") + "<br>");
+        document.write(mathOperation(3, 7, "diff") + "<br>");
+        document.write(mathOperation(3, 7, "mult") + "<br>");
+        document.write(mathOperation(3, 7, "div") + "<br>");
+
+
+        //Задание 7.
+        document.write('<p>Задание 7</p>');
+        document.write(`null > 0: '${null > 0}'<br>`);
+        document.write(`null = 0: '${null == 0}'<br>`);
+        document.write(`null < 0: '${null < 0}'<br>`);
+        document.write(`Результат каждой из 3-х операция сравнения - false, т.к. null обозначает отсутствие какого-либо значения`);
+
+        //Задание 8.
+        document.write('<p>Задание 8</p>');
+
+        function power(val, pow) {
+            if (pow <= 1) {
+                return val;
+            }
+            return val * power(val, pow - 1);
+        }
+
+        var num = 3;
+        var deg = 7;
+
+        document.write(`Результат возведения числа ${num} в степень ${deg}: ${power(num, deg)}`);
+
+    </script>
+</body>
+
+</html>
