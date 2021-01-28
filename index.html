@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson3</title>
+</head>
+
+<body>
+    <script>
+
+        //Задание 1. С помощью цикла while вывести все простые числа в промежутке от 0 до 100
+        var index = 0;
+
+        function NumberIsPrime(number) {
+            if (number == 0) {
+                return false;
+            }
+            limit = Math.floor(number / 2);
+            divider = 2;
+            while (divider <= limit) {
+                if (number % divider++ == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        while (index <= 100) {
+            if (NumberIsPrime(index)) document.write(`Простое число: ${index}<br>`);
+            index++;
+        }
+
+        //Задание 2. Сущность корзины
+        var basket = [
+            {
+                title: "Товар 1",
+                price: 100
+            }
+            , {
+                title: "Товар 2",
+                price: 200
+            }
+            , {
+                title: "Товар 3",
+                price: 300
+            }
+        ];
+
+        //Задание 3. Подсчет стоимости корзины
+        function countBasketPrice(basket) {
+            var total = 0;
+            for (var good of basket) {
+                total += good.price;
+            }
+            return total;
+        }
+
+        document.write(`<br>Стоимость корзины: ${countBasketPrice(basket)}<br>`);
+
+        //Задание 4. Вывести с помощью цикла for числа от 0 до 9, не используя тело цикла
+        for (let i = 0; i < 10; document.write(`<br>Число вне тела цикла: ${i++}`)) { }
+
+        //Задание 5. Нарисовать пирамиду с помощью console.log
+        var arr = [];
+        for (let i = 1; i <= 20; i++) {
+            arr.push("x");
+            console.log(arr.join(''));
+        }
+
+
+    </script>
+</body>
+
+</html>
