@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson4</title>
+
+</head>
+
+<body>
+    <script>
+        //Задание 1. Написать функцию, преобразующую число в объект. 
+
+        function ConvertNumberToObject(number) {
+            var str = number.toString();
+            var arr = str.split('');
+            var obj = {
+                units: +arr[2]
+                , tens: +arr[1]
+                , hundreds: +arr[0]
+            };
+            return obj;
+        }
+
+        var num = Math.round(Math.random() * 999);
+        console.log('Число:' + num);
+        console.log('Объект:');
+        console.log(ConvertNumberToObject(num));
+
+    </script>
+
+    <script src="js/text.js" defer>
+    //Задание 2. Для игры, реализованной на уроке, добавить возможность вывода хода номер n
+    //Изменения - см. коммит файла gameCode.js
+    </script>
+    <script src="js/gameCode.js" defer></script>
+</body>
+
+</html>

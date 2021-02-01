@@ -3,12 +3,13 @@
 
 var event, ok;
 
-//var answers = [];
+var answers = [];
 
 do {//Выводим первый вопрос
     ok = false;
-    event = +prompt(works.a00 + works.a1 + works.a2 + '-1 - Выход из игры');
-   
+    //event = +prompt(works.a00 + works.a1 + works.a2 + '-1 - Выход из игры');
+    event = GetQuestionAndAnswer(works.a00, works.a1, works.a2);
+
     if (event == -1) {
         break;
     }
@@ -20,7 +21,8 @@ switch (event) {
     case 1: // Первое действие  - если в первом окне ввели 1 то открываем серию окон - окно 2
         do {
             ok = false;
-            event = +prompt(works.b00 + works.b1 + works.b2 + '-1 - Выход из игры');
+            // event = +prompt(works.b00 + works.b1 + works.b2 + '-1 - Выход из игры');
+            event = GetQuestionAndAnswer(works.b00, works.b1, works.b2);
             if (event == -1) {
                 break;
             }
@@ -32,7 +34,8 @@ switch (event) {
             case 1: // Второе действие, если во 2 окне ввели 1 то переходим на 4 окно
                 do {
                     ok = false;
-                    event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    //event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    event = GetQuestionAndAnswer(works.d00, works.d1, works.d2);
                     if (event == -1) {
                         break;
                     }
@@ -45,7 +48,8 @@ switch (event) {
             case 2: // Второе действие   Если ввели 2 то также переходим на 4 окно
                 do {
                     ok = false;
-                    event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    // event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    event = GetQuestionAndAnswer(works.d00, works.d1, works.d2);
                     if (event == -1) {
                         break;
                     }
@@ -64,7 +68,9 @@ switch (event) {
     case 2: // Первое действие    Если в 1 окне ввели 2 то переходим к 3 окну
         do {
             ok = false;
-            event = +prompt(works.c00 + works.c1 + works.c2 + '-1 - Выход из игры');
+            // event = +prompt(works.c00 + works.c1 + works.c2 + '-1 - Выход из игры');
+            event = GetQuestionAndAnswer(works.c00, works.c1, works.c2);
+
             if (event == -1) {
                 break;
             }
@@ -76,7 +82,9 @@ switch (event) {
             case 1: // Второе действие
                 do {
                     ok = false;
-                    event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    // event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    event = GetQuestionAndAnswer(works.d00, works.d1, works.d2);
+
                     if (event == -1) {
                         break;
                     }
@@ -89,7 +97,8 @@ switch (event) {
             case 2: // Второе действие
                 do {
                     ok = false;
-                    event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    // event = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                    event = GetQuestionAndAnswer(works.d00, works.d1, works.d2);
                     if (event == -1) {
                         break;
                     }
@@ -112,6 +121,15 @@ switch (event) {
 }
 alert('Спасибо за игру');
 
+var iAnswer = +prompt(`Количество ответов: ${answers.length}. Какой номер отобразить?`);
+if (!isNaN(iAnswer)) {
+    var str = "Вопрос:\n";
+    str += answers[iAnswer - 1].question + "\n";
+    str += "Ответ: \n";
+    str += answers[iAnswer - 1].variant + "\n";
+    alert(str);
+}
+
 //------------------------------------------
 function isAnswer(q, event) {
     if (isNaN(event) || !isFinite(event)) {
@@ -122,7 +140,20 @@ function isAnswer(q, event) {
         alert('Ваше число выходит из допустимого диапозона');
         return false;
     }
-	return true;
-    
-}
+    return true;
 
+}
+//-----------------------------------------
+function GetQuestionAndAnswer(question, variant1, variant2) {
+    event = +prompt(question + variant1 + variant2 + '-1 - Выход из игры');
+    if (isNaN(event) || !isFinite(event)) {
+    } else {
+        if (event == 1) {
+            variant = variant1;
+        } else {
+            variant = variant2;
+        }
+        answers.push({ question, variant });
+    }
+    return event;
+}
