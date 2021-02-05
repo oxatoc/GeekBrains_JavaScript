@@ -22,13 +22,12 @@
         var container = document.getElementById('chess-board-container');
         var table = document.createElement('table');
         table.style.borderCollapse = 'collapse';
-        // table.style.borderWidth = '1px';
-        // table.style.borderColor = '#888';
-        // table.style.borderStyle = 'solid';
 
         container.append(table);
         var tbody = document.createElement('tbody');
         table.append(tbody);
+
+        //Задание 2, 3. Заполнить таблицу буквами/символами
 
         for (var row of rowsArray) {
             var tr = document.createElement('tr');
@@ -70,18 +69,16 @@
         }
 
         function GetChessPiece(rowIndex, columnIndex) {
-            //var secondLineArray = ['', 'Л', 'К', 'C', 'Ф', 'К', 'С', 'К', 'Л'];
-            //var pawn = 'П';
+
             var secondLineArrayBlacks = ['', '&#9820;', '&#9822;', '&#9821;', '&#9819;', '&#9818;', '&#9821;', '&#9822;', '&#9820;'];
             var secondLineArrayWhites = ['', '&#9814;', '&#9816;', '&#9815;', '&#9813;', '&#9812;', '&#9815;', '&#9816;', '&#9814;'];
             var whitePawn = '&#9817;';
             var blackPawn = '&#9823;';
 
-
             if (rowIndex == 1) return secondLineArrayBlacks[columnIndex];
-            if (rowIndex == 8) return secondLineArrayWhites[columnIndex];
             if (rowIndex == 2) return blackPawn;
             if (rowIndex == 7) return whitePawn;
+            if (rowIndex == 8) return secondLineArrayWhites[columnIndex];
             return '';
         }
 
