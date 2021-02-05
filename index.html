@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="chess-board-container">
+
+    </div>
+    <script>
+        //Задание 1. Создать функцию, генерирующую шахматную доску. 
+        const columnsArray = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const rowsArray = [' ', '1', '2', '3', '4', '5', '6', '7', '8'];
+        const chessPieceSize = '1.5rem'
+
+        var container = document.getElementById('chess-board-container');
+        var table = document.createElement('table');
+        table.style.borderCollapse = 'collapse';
+        // table.style.borderWidth = '1px';
+        // table.style.borderColor = '#888';
+        // table.style.borderStyle = 'solid';
+
+        container.append(table);
+        var tbody = document.createElement('tbody');
+        table.append(tbody);
+
+        for (var row of rowsArray) {
+            var tr = document.createElement('tr');
+            tbody.append(tr);
+            for (var column of columnsArray) {
+                var td = document.createElement('td');
+                td.style.width = '2rem';
+                td.style.height = '2rem';
+                td.style.borderWidth = '1px';
+                td.style.borderColor = '#888';
+                td.style.borderStyle = 'solid';
+                td.style.textAlign = 'center'
+
+                //Запись обозначений строк и столбцов
+                if (rowsArray.indexOf(row) == 0) {
+                    td.innerText = column;
+                    td.style.color = '#aaa';
+                    td.style.fontSize = '0.75rem';
+                } else if (columnsArray.indexOf(column) == 0) {
+                    td.innerText = row;
+                    td.style.color = '#aaa';
+                    td.style.fontSize = '0.75rem';
+                } else {
+                    //Заливка ячеек и расстановка фигур
+                    var rowIndex = rowsArray.indexOf(row);
+                    var columnIndex = columnsArray.indexOf(column);
+                    if (
+                        (rowIndex % 2 != 0 && columnIndex % 2 != 0)
+                        ||
+                        (rowIndex % 2 == 0 && columnIndex % 2 == 0)
+                    ) {
+                        td.style.backgroundColor = '#ccc';
+                    }
+                    td.innerHTML = GetChessPiece(rowIndex, columnIndex);
+                    td.style.fontSize = chessPieceSize;
+                }
+                tr.append(td);
+            }
+        }
+
+        function GetChessPiece(rowIndex, columnIndex) {
+            //var secondLineArray = ['', 'Л', 'К', 'C', 'Ф', 'К', 'С', 'К', 'Л'];
+            //var pawn = 'П';
+            var secondLineArrayBlacks = ['', '&#9820;', '&#9822;', '&#9821;', '&#9819;', '&#9818;', '&#9821;', '&#9822;', '&#9820;'];
+            var secondLineArrayWhites = ['', '&#9814;', '&#9816;', '&#9815;', '&#9813;', '&#9812;', '&#9815;', '&#9816;', '&#9814;'];
+            var whitePawn = '&#9817;';
+            var blackPawn = '&#9823;';
+
+
+            if (rowIndex == 1) return secondLineArrayBlacks[columnIndex];
+            if (rowIndex == 8) return secondLineArrayWhites[columnIndex];
+            if (rowIndex == 2) return blackPawn;
+            if (rowIndex == 7) return whitePawn;
+            return '';
+        }
+
+    </script>
+</body>
+
+</html>
