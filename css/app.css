@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 40rem;
+}
+
+.container-button-buy-item {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem;
+  margin: 0 auto;
+  display: block;
+  background-color: transparent;
+  outline: none;
+}
+
+.container-button-buy-item:hover {
+  background-color: lightgray;
+  -webkit-box-shadow: 0 0 0 1px #ccc;
+          box-shadow: 0 0 0 1px #ccc;
+}
+
+.container-button-buy-item:focus {
+  outline: none;
+}
+
+.container-cart-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.8rem;
+}
+
+.container-cart-row-name {
+  width: 16rem;
+}
+
+.container-cart-row-name-header {
+  text-align: center;
+}
+
+.container-cart-row-name-value {
+  text-align: left;
+}
+
+.container-cart-row-price {
+  width: 8rem;
+}
+
+.container-cart-row-price-header {
+  text-align: center;
+}
+
+.container-cart-row-price-value {
+  text-align: right;
+}
+
+.container-cart-row-quantity {
+  width: 8rem;
+}
+
+.container-cart-row-quantity-header {
+  text-align: center;
+}
+
+.container-cart-row-quantity-value {
+  text-align: right;
+}
+
+.container-cart-row-header {
+  margin-bottom: 0.5rem;
+}
+
+.container-cart-row-footer {
+  margin-top: 0.5rem;
+}
+
+.container-full-image {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 16rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-full-image-item {
+  min-width: 24rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  height: 16rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.container-full-image-item-img {
+  height: 12rem;
+  display: block;
+  margin: 0rem auto;
+}
+
+.container-full-image-arrow {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  color: #ccc;
+  margin: 0 0.5rem;
+}
+
+.container-full-image-arrow:hover {
+  color: lightslategray;
+}
+
+.container-thumbnails {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+}
+
+.container-thumbnails-thumbnail {
+  height: 6rem;
+  margin: 0 0.5rem;
+}
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,119 @@
+$arrowSize: 3rem;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 40rem;;
+}
+
+.container-button-buy{
+
+    &-item{
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        padding: 0.5rem 2rem;
+        margin: 0 auto;
+        display: block;
+        background-color: transparent;
+        outline: none;
+    }
+    &-item:hover{
+        background-color: lightgray;
+        box-shadow: 0 0 0 1px #ccc;
+    }
+    &-item:focus{
+        outline: none;
+    }
+
+}
+
+.container-cart{
+    &-row{ //Стиль строки
+        display: flex;
+        font-size: 0.8rem;
+        &-name { //стиль ячейки
+            width: 16rem;
+            &-header{
+                text-align: center;
+            }
+            &-value{
+                text-align: left;
+            }
+        }
+        &-price{ //стиль ячейки
+            width: 8rem;
+            &-header{
+                text-align: center;
+            }
+            &-value{
+                text-align: right;
+            }
+        }
+        &-quantity{ //стиль ячейки
+            width: 8rem;
+            &-header{
+                text-align: center;
+            }
+            &-value{
+                text-align: right;
+            }
+        }
+        &-header{//стиль заголовка
+            margin-bottom: 0.5rem;
+        }
+        &-footer{//стиль строки итогов
+            margin-top: 0.5rem;
+        }
+    }
+    
+
+}
+
+.container-full-image{
+    padding: 1rem;
+    display: flex;
+    min-height: 16rem;
+    align-items: center;
+
+    &-item{ //контейнер с фиксированной шириной - чтобы внутри него помещать тэг img или текст об отстутствии изображения
+        min-width: 24rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        height: 16rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        &-img{ //стиль изображения
+            height: 12rem;
+            display: block;
+            margin: 0rem auto;
+    
+        }
+    }
+    &-arrow{
+        display: block;
+        width: $arrowSize;
+        height: $arrowSize;
+        color: #ccc;
+        margin: 0 0.5rem;
+    }
+    &-arrow:hover{
+        color: lightslategray;
+    }
+}
+
+.container-thumbnails{
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem;
+    &-thumbnail{
+        height: 6rem;
+        margin: 0 0.5rem;
+    }
+}
