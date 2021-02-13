@@ -14,9 +14,9 @@ function init() {
 
     var wrap = document.getElementsByClassName('wrap')[0];
     // Подгоняем размер контейнера под игровое поле
-    
-	/*
-	if (16 * (FIELD_SIZE_X + 1) < 380) {
+
+    /*
+    if (16 * (FIELD_SIZE_X + 1) < 380) {
         wrap.style.width = '380px';
     }
     else {
@@ -28,7 +28,7 @@ function init() {
     document.getElementById('snake-start').addEventListener('click', startGame);
     document.getElementById('snake-renew').addEventListener('click', refreshGame);
 
-// Отслеживание клавиш клавиатуры
+    // Отслеживание клавиш клавиатуры
     addEventListener('keydown', changeDirection);
 }
 
@@ -68,6 +68,47 @@ function startGame() {
 
     snake_timer = setInterval(move, SNAKE_SPEED);//каждые 200мс запускаем функцию move
     setTimeout(createFood, 5000);
+
+    /**
+     * Таймер препятствий
+     */
+    bomb_timer = setInterval(placeBomb, 7000);
+}
+
+/**
+ * Устанавливаем препятствие
+ */
+function placeBomb() {
+    var bombCreated = false;
+
+    while (!bombCreated) {
+        var bomb_x = Math.floor(Math.random() * FIELD_SIZE_X);
+        var bomb_y = Math.floor(Math.random() * FIELD_SIZE_Y);
+
+        var bomb_cell = document.getElementsByClassName('cell-' + bomb_y + '-' + bomb_x)[0];
+
+        /* Проверка попадания препятствия на один из имеющихся элементов */
+        if (!isPlaced(bomb_x, bomb_y, ["snake-unit", "food-unit", "bomb-unit"])) {
+            bombCreated = true;
+            bomb_cell.classList.add("bomb-unit");
+        }
+    }
+}
+
+/**
+ * Общая функция проверки - находится ли в данной ячейке какой-либо класс из массива
+ * @param {int} x коордната ячейки
+ * @param {int} y координата ячейки
+ * @param {array} classesArray 
+ * @returns {boolean}
+ */
+function isPlaced(x, y, classesArray) {
+    var placedFlag = false;
+    for (var classItem of classesArray) {
+        var cell = document.getElementsByClassName("cell-" + y + "-" + x)[0];
+        placedFlag ||= cell.classList.contains(classItem);
+    }
+    return placedFlag;
 }
 
 /**
@@ -85,7 +126,7 @@ function respawn() {
     var snake_head = document.getElementsByClassName('cell-' + start_coord_y + '-' + start_coord_x)[0];
     snake_head.setAttribute('class', snake_head.getAttribute('class') + ' snake-unit');
     // Тело змейки
-    var snake_tail = document.getElementsByClassName('cell-' + (start_coord_y-1) + '-' + start_coord_x)[0];
+    var snake_tail = document.getElementsByClassName('cell-' + (start_coord_y - 1) + '-' + start_coord_x)[0];
     snake_tail.setAttribute('class', snake_tail.getAttribute('class') + ' snake-unit');
 
     snake.push(snake_head);
@@ -101,7 +142,7 @@ function respawn() {
 function move() {
     //console.log('move',direction);
     // Сборка классов
-    var snake_head_classes = snake[snake.length-1].getAttribute('class').split(' ');
+    var snake_head_classes = snake[snake.length - 1].getAttribute('class').split(' ');
 
     // Сдвиг головы
     var new_unit;
@@ -111,34 +152,41 @@ function move() {
 
     // Определяем новую точку
     if (direction == 'x-') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x - 1))[0];
+        coord_x--;
+        if (coord_x < 0) { coord_x = FIELD_SIZE_X - 1 };
     }
     else if (direction == 'x+') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x + 1))[0];
+        coord_x++;
+        if (coord_x > FIELD_SIZE_X - 1) { coord_x = 0 };
     }
     else if (direction == 'y+') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y - 1) + '-' + (coord_x))[0];
+        coord_y--;
+        if (coord_y < 0) { coord_y = FIELD_SIZE_Y - 1 };
     }
     else if (direction == 'y-') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y + 1) + '-' + (coord_x))[0];
+        coord_y++;
+        if (coord_y > FIELD_SIZE_Y - 1) { coord_y = 0 };
     }
+
+    new_unit = document.getElementsByClassName('cell-' + coord_y + '-' + coord_x)[0];
 
     // Проверки
     // 1) new_unit не часть змейки
     // 2) Змейка не ушла за границу поля
+    // 3) столкновение с препятствием
     //console.log(new_unit);
-    if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+    if (!isSnakeUnit(new_unit) && new_unit !== undefined && !isPlaced(coord_x, coord_y, ["bomb-unit"])) {
         // Добавление новой части змейки
         new_unit.setAttribute('class', new_unit.getAttribute('class') + ' snake-unit');
         snake.push(new_unit);
 
         // Проверяем, надо ли убрать хвост
-       
-	   if (!haveFood(new_unit)) {
+
+        if (!haveFood(new_unit)) {
             // Находим хвост
-           var removed = snake.splice(0, 1)[0];
+            var removed = snake.splice(0, 1)[0];
             var classes = removed.getAttribute('class').split(' ');
-			
+
             // удаляем хвост
             removed.setAttribute('class', classes[0] + ' ' + classes[1]);
         }
@@ -177,6 +225,7 @@ function haveFood(unit) {
         createFood();
 
         score++;
+        document.getElementById("score").innerText = "Счёт съеденного корма: " + score;
     }
     return check;
 }
@@ -195,8 +244,8 @@ function createFood() {
         var food_cell = document.getElementsByClassName('cell-' + food_y + '-' + food_x)[0];
         var food_cell_classes = food_cell.getAttribute('class').split(' ');
 
-        // проверка на змейку
-        if (!food_cell_classes.includes('snake-unit')) {
+        // проверка на змейку и препятствие
+        if (!isPlaced(food_x, food_y, ["snake-unit", "bomb-unit"])) {
             var classes = '';
             for (var i = 0; i < food_cell_classes.length; i++) {
                 classes += food_cell_classes[i] + ' ';
@@ -213,9 +262,9 @@ function createFood() {
  * @param e - событие
  */
 function changeDirection(e) {
-    console.log(e);
-	
-	switch (e.keyCode) {
+    /* console.log(e); */
+
+    switch (e.keyCode) {
         case 37: // Клавиша влево
             if (direction != 'x+') {
                 direction = 'x-'
@@ -245,6 +294,7 @@ function changeDirection(e) {
 function finishTheGame() {
     gameIsRunning = false;
     clearInterval(snake_timer);
+    clearInterval(bomb_timer);
     alert('Вы проиграли! Ваш результат: ' + score.toString());
 }
 

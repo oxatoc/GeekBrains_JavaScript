@@ -11,9 +11,16 @@
     float: left;
     margin-right: 10px;
 }
+.bomb-unit{
+    background-color: orange;
+}
 .game-table{
     border-collapse: collapse;
     background-color: #3e3e3e;
+}
+.score-container{
+    margin-top: 1rem;
+    text-align: center;
 }
 td.game-table-cell{
     width: 15px;
